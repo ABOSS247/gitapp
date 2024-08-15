@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %} Add Medicine {% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-image: url(/static/images/capsule-vs-tablet.webp);
+            background-size: cover;
+        }
+
+        .form1 {
+            margin-top: 50px;
+        }
+    </style>
+        <div class="form1">
+            <h1 style="text-align: center; color: rgb(23, 5, 187);">Add Medicine</h1>
+        
+             
+            <form action="" method="POST">
+                <label for="ssn_id">Medicine id*</label>
+                <input type="number" class="text1" id="mid" name="mid" required><br><br>
+                <label for="pname">Medicine Name*</label>
+                <input type="text" class="text1" id="mname" name="mname" required><br><br>
+                <label for="age">Quantity Available*</label>
+                <input type="number" class="text1" id="qavailable" name="qavailable" min="0" required><br><br>
+                <label for="age">Rate*</label>
+                <input type="number" class="text1" id="rate" name="rate" min="0" required><br><br>
+
+                <pre>(*)Fields are compulsary</pre>
+                <button class="button" type="submit">Submit</button>
+                <button class="rbutton" type="reset">Reset</button>
+            </form>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <h3 style="color: red;"> {{ msg }} </h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+        
+        </div>
+    {% endblock %}

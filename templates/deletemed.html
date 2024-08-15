@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %} Medicine Status {% endblock %}
+
+{% block css %}
+<style>
+    body {
+        background-image: url(/static/images/medication3648734.avif);
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="stat">
+
+    <h1 style="color: red;"> Delete Medicine </h1><br>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="color: rgb(255, 5, 5);text-align: center; font-weight: bolder;"> {{ msg }} </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
+
+    <table border="1" align="center">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>QTY AVAILABLE</th>
+            <th>PRICE</th>
+            <th></th>
+            
+        </tr>
+        {% for update in updatep %}
+        <tr>
+            <td> {{ update.mid }} </td>
+            <td> {{ update.mname }} </td>
+            <td> {{ update.qavailable }} </td>
+            <td> {{ update.rate }} </td>
+            <td> <button type="button" class="dbutton" onclick="window.location='deletemedicinedetail/{{ update.mid }}'"> Delete Medicine </button> </td>
+        </tr>
+        {% else %}
+
+        <h3>No Medicines!</h3>
+        {% endfor %}
+    </table>
+    <br>
+
+    <form action="{{ url_for('medicinestatus') }}">
+    <button type="submit" class="ibutton" value="Refresh the list">Refresh Status</button>
+    </form>
+    
+</div>
+
+{% endblock %}

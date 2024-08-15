@@ -1,0 +1,45 @@
+<title>Login</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image:url(/static/images/hosp.jpg/);
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        line-height: 1.8;
+    }
+</style>
+
+
+
+<div class="container">  
+    <p><b> Administration Staff Login</b></p>
+    <div class="form-wrap">
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="uname" style="font-weight: bold; color: rgb(75, 84, 216);"> Username </label><br><input class="text" type="text" name="username" required minlength="5" class="logindecor" placeholder="UserName">
+        
+                <label for="pass" style="font-weight: bold; color: rgb(65, 77, 240);"> Password </label> <br><input class="text" type="password" name="password" required minlength="6" class="logindecor" placeholder="Password"><br>           
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <strong style="color: green;">Don't have Account?  Click <a href="{{ url_for('registration') }}">here</a> to Register.</strong>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+        
+            <p class="messages"> {{ msg }} </p>
+       
+        {% endfor %}
+    {% endif %}
+{% endwith%}
+</div>
+

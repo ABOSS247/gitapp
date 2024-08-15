@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block title %} Bill Patient {% endblock %}
+
+{% block content %} 
+
+<style>
+    body {
+        background-image: url(/static/images/slider-image.jpg);
+        background-size: 120%;
+    }
+
+    .text{
+        width: 250px;
+        padding: 10px 5px;
+        border: none;
+        border: solid 2px rgb(31, 21, 21);
+        border-radius: 5px;
+    }
+    .button {
+        width: 40%;
+    }
+</style>
+<div style="margin-top: 150px; text-align: center;">
+    <h1 style="color: rgb(7, 7, 141);"> Search Patient for Billing</h1>
+
+ <div style="margin-left: -10px;">
+    <form action="" method="POST">
+        <label for="customer_id" style="font-weight: bold; font-size: large; color: red;">Patient ID</label>
+&nbsp;&nbsp;        <input class="text" type="text" name="id" id="id"><br><br>
+        <button class="button" type="submit"  >Search </button>
+    </form>
+</div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}<br>
+        <p style="color: rgb(255, 5, 5);text-align: center; font-weight: bolder;"> <strong>{{ msg }}</strong> </p>
+        {% endfor %}
+{% endif %}
+{% endwith%}
+<br>
+
+<div >
+    {% if patient %}
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>SSN ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>ROOM TYPE</th>
+            <th>ADDRESS</th>
+            <th>STATUS</th>
+            <th>ADMIT DATE</th>
+            <th>No. OF DAYS</th>
+            <th>ROOM BILL </th>
+            
+        </tr>
+        
+        <tr>
+            <td> {{ patient.id }} </td>
+            <td> {{ patient.ssn_id }} </td>
+            <td> {{ patient.pname }} </td>
+            <td> {{ patient.age }} </td>
+            <td> {{ patient.tbed }} </td>
+            <td> {{ patient.address }}</td>
+            <td> {{ patient.status }} </td>
+            <td> {{ y }} </td>
+            <td> {{dy}} </td>
+            <td> {{ bill }} </td>
+        </tr>
+
+        <tr>
+            
+        </tr>
+        
+    </table>
+
+    
+</div>
+
+    {% else %}
+
+                <h3></h3>
+
+    {% endif %}
+    
+   <div> 
+        <br><br>
+        {% if med %}
+        <p style="color: rgb(248, 11, 11);text-align: left;"> <strong>Medicines Issued</strong> </p>
+        <table class="table" border="1">
+            <tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th> QUANTITY ISSUED </th>
+                <th>ISSUED DATE</th>
+                <th> RATE </th>
+                <th> TOTAL </th>
+            </tr>
+            {% for med in med %}
+            <tr>
+                <td> {{ med.mid }} </td>
+                <td> {{ med.mname }} </td>
+                <td> {{ med.qissued }} </td>
+                <td> {{ med.date }} </td>
+                <td> {{ med.rate }}.00 </td>
+                <td> {{ med.qissued * med.rate }}.00 /- </td>
+            </tr>
+            {% else %}
+                <h4>No Medicines issued  </h4> 
+            {% endfor %}
+        </table>
+        {% endif %}
+    
+        <br><br>
+        {% if dia %}
+        <p style="color: rgb(248, 11, 11);text-align: left;"> <strong>Diagnostics Issued</strong> </p>
+        <table class="table" border="1">
+            <tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th>ISSUED DATE</th>
+                <th> RATE </th>
+            </tr>
+            {% for dia in dia %}
+            <tr>
+                <td> {{ dia.tid }} </td>
+                <td> {{ dia.tname }} </td>
+                <td> {{ dia.date }} </td>
+                <td> {{ dia.tcharge }}.00 </td>
+            </tr>
+            {% else %}
+                <h4>No Tests issued  </h4> 
+            {% endfor %}
+        </table>
+        {% endif %}
+    
+       </div>
+
+       <div>
+           {% if patient %}
+
+           <h1 style="text-align: center; color: rgb(247, 247, 247); background-color: rgb(253, 0, 0);" >TOTAL BILL</h1>
+           <table >
+                <tr>
+                    <th> ROOM TOTAL </th>
+                    <th> MEDICINES TOTAL </th>
+                    <th> DIAGNOSTICS TOTAL </th>
+                    <th> GRAND TOTAL </th>
+                    <th> BILL </th>
+                </tr>
+                <tr>
+                    <td> {{ bill }}/- </td>
+                    <td> {{ mtot }}/- </td>
+                    <td> {{tot}}/- </td>
+                    <td> {{ bill + mtot + tot }}.00/- </td>
+                    <td> <button type="button" class="dbutton" onclick="window.location='generatebill/{{ patient.id }}'"> Generate Bill </button> </td>
+                    
+                </tr>
+           </table>
+           {% endif %}
+       </div>
+
+
+
+{% endblock %}

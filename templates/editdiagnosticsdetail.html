@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %} Edit Diagnostics {% endblock %} 
+
+{% block css %}
+<style>
+    body {
+        margin-top: 80px;
+        background-image: url(/static/images/Healthcare-Software-Solution.jpg);
+        background-size: 130%;
+    }
+</style>
+{% endblock %}
+
+{% block content %} 
+
+<style>
+   
+</style>
+<div class="form1">
+    <h1 id="cst_head">Edit Diagnostics </h1>
+    
+    {% for edit in editpat %}
+    <form action="" method="POST">
+        <label for="id">Test ID:   </label> {{ edit.tid }} <br><br>
+        
+        <label for="Name">Old Test Name:   </label> {{ edit.tname }} <br><br>
+        <label for="New customer Name*">New Test Name*</label>
+        <input type="text" class="text1" id="mname" name="mname" required><br><br>
+        
+        <label for="Old Age">Old Rate:  </label> {{ edit.tcharge }} <br><br>
+        <label for="New Age*">New Rate*</label>
+        <input type="number" class="text1" id="rate" name="rate" min="1" required><br><br>
+       
+        <pre>(*)Fields are compulsary</pre>
+        <button  type="submit" class="ubutton">Update</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p> {{ msg }} </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

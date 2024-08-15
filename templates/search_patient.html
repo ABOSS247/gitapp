@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %} Search Patient {% endblock %}
+
+{% block css %}
+<style>
+    body{
+        background-image: url(/static/images/hosspp.jpg/);
+        background-size: cover;
+    }
+
+   .text{
+        width: 250px;
+        padding: 10px 5px;
+        border: none;
+        border: solid 1px rgb(37, 62, 99) !important;
+        border-radius: 5px;
+    }
+    
+    .button {
+        background-color: rgb(37, 62, 99);
+        width: 50%;
+        border-radius: 1px;
+        padding: 10px;
+        color: #fff; 
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 5px;
+        opacity: 0.8;
+    }
+    
+</style>
+{% endblock %}
+{% block content %} 
+
+
+<div style="margin-top: 150px; text-align: center;">
+    <h1 style="color: red;"> Search Patient </h1>
+
+    <div style="margin-left: -10px;">
+    <form action="" method="POST">
+        <label for="id" style="font-weight: bold; font-size: large; color: rgb(2, 2, 146);">Patient ID</label>
+        &nbsp;&nbsp;
+        <input type="text" class="text"  name="id" id="id"><br><br>
+        <button class="button" type="submit">Search</button>
+    </form>
+    </div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}
+    <div > <br>
+        <p style="color: rgb(248, 11, 11);text-align: center;"> <strong>{{ msg }}</strong> </p>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith%}
+
+<br>
+<div  >
+    {% if patient %}
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>SSN ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>ROOM TYPE</th>
+            <th>ADDRESS</th>
+            <th>CITY</th>
+            <th>STATE</th>
+            <th>STATUS</th>
+            <th>ADMITTED ON</th>
+            <th>LAST UPDATED</th>
+            <th></th>
+            <th></th>
+            
+        </tr>
+        
+        <tr>
+            <td> {{ patient.id }} </td>
+            <td> {{ patient.ssn_id }} </td>
+            <td> {{ patient.pname }} </td>
+            <td> {{ patient.age }} </td>
+            <td> {{ patient.tbed }} </td>
+            <td> {{ patient.address }}</td>
+            <td> {{ patient.city }} </td>
+            <td> {{ patient.state }} </td>
+            <td> {{ patient.status }} </td>
+            <td> {{ patient.date }} </td>
+            <td> {{ patient.ldate }} </td>
+            <td> <button type="button" class="ubutton" onclick="window.location='editpatientdetail/{{ patient.id }}'"> Edit Patient </button> </td>
+            <td> <button type="button"  class="dbutton" onclick="window.location='deletepatientdetail/{{ patient.id }}'"> Delete Patient </button> </td>
+        </tr>
+        
+    </table>
+    
+</div>
+
+    {% else %}
+
+                <h3></h3>
+
+    {% endif %}
+
+{% endblock %}

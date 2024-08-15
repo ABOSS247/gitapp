@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %} Issue Medicine {% endblock %}
+
+{% block css %}
+<style>
+    body {
+        margin-top: 80px;
+        background-image: url(/static/images/medication3648734.avif);
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="form1">
+    <h1 style="color: rgb(238, 0, 0); "> Search Medicine </h1>
+
+ 
+    <form action="" method="POST">
+        <label for="customer_id">Medicine Name</label>
+        <input type="text" class="text1" name="mname" id="mname" required><br><br>
+
+        <label for="qissued">Quantity Required*</label>
+        <input type="number" class="text1" id="qissued" name="qissued" min="0" required><br><br>
+
+        <button class="ibutton" type="submit">Issue</button>
+    </form>
+    
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}
+        <p style="font-weight: bolder; font-size: larger; color: red; text-align: center;"> {{ msg }} </p>
+    {% endfor %}
+{% endif %}
+{% endwith%}
+<div>
+{% if patient %}
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>QTY AVAILABLE</th>
+        <th>RATE</th>
+        
+    </tr>
+    
+    <tr>
+        <td> {{ patient.mid }} </td>
+        <td> {{ patient.mname }} </td>
+        <td> {{ patient.qavailable }} </td>
+        <td> {{ patient.rate }} </td>
+    </tr>
+</table>
+
+    
+    {% else %}
+
+    <h3 style="color: red; text-align: center;">No Medicines!</h3>
+    {% endif %}
+
+</div>
+
+{% endblock %}

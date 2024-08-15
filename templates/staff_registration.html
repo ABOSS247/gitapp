@@ -1,0 +1,39 @@
+<title>Registration</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+<style>
+   body{
+    background-image: url(/static/images/090716_stjoes.jpg);
+    background-size: 130%;
+   }
+
+   label {
+    font-weight: bold;
+    color: rgb(78, 78, 235);
+   }
+</style>
+
+
+<div class="container">     
+    <p><b>Hospital Staff Registration</b></p></br>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for msg in messages %}
+        <p class="messages"> {{ msg }} </p>
+    {% endfor %} {% endif %} {% endwith%}
+
+    <div class="form-wrap">
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="uname">Username</label>
+                <input class="text" type="text" name="uname" required minlength="5"><br><br>
+                <label  for="pass">Password</label>
+                <input  class="text" type="password" name="pass" required minlength="6"><br><br>
+                <label for="cpass">Confirm Password</label>
+                <input  class="text" type="password" name="cpass" required minlength="6"><br><br>
+                <button class="bt" type="submit">Register</button>
+            </div>     
+        </form>
+    <strong style="color: green;">Already have an Account?  Click <a href="{{ url_for('login') }}">here</a> to Login.</strong>
+    </div>
+
+</div>

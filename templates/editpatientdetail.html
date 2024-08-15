@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title %} Edit Patient {% endblock %}
+
+{% block css %}
+<style>
+    body {
+        margin-top: 80px;
+        background-image: url(/static/images/bg.jpg/);
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %} 
+
+<style>
+    
+</style>
+<div class="form1">
+    <h1 style="color: rgb(11, 29, 129); text-align: center;">Edit Patient </h1>
+    
+    {% for edit in editpat %}
+    <form action="" method="POST">
+        <label for="id">Patient ID:   </label> <b>{{ edit.id }}</b> <br><br>
+        <label for="ssn id">Patient SSN ID: </label> <b> {{ edit.ssn_id }} </b> <br><br>
+        
+        <label for="Name">Old Patient Name:   </label> <b>{{ edit.pname }}</b> <br><br>
+
+        <label for="New customer Name*">New Patient Name*</label>
+        <input type="text" class="text1" id="npname" name="npname" required><br><br>
+
+        <label for="Old Address">Old Address:  </label> <b>{{ edit.address }}</b> <br><br>
+
+        <label for="New Address*">New Address*</label>
+        <input type="text" class="text1" id="naddress" name="naddress" required><br><br>
+
+        <label for="Old Age">Old Age:  </label> <b>{{ edit.age }}</b> <br><br>
+
+        <label for="New Age*">New Age*</label>
+        <input type="number" class="text1" id="nage" name="nage" min="0"  maxlength="2" required><br><br>
+
+        <label for="Old Address">Old Room:  </label><b> {{ edit.tbed }}</b> <br><br>
+
+        <label for="Bed">New Room*</label>
+            <select id="tbed" class="text1" name="tbed">
+                <option value="GeneralWard">General Ward</option>
+                <option value="SemiSharing">Semi Sharing</option>
+                <option value="SingleRoom">Single Room</option>
+            </select><br><br>
+
+        <label for="Old Address">Old State:  </label> <b> {{ edit.state }}</b> <br><br>       
+        <label for="state">Current State*</label>
+            <select id="nstate" class="text1" name="nstate">
+                <option value="Abia">Abia</option>
+                <option value="Anambra">Anambra</option>
+                <option value="Bayelsa">Bayelsa</option>
+                <option value="Benue">Benue</option>
+                <option value="Cross River">Cross River</option>
+                <option value="Delta">Delta</option>
+                <option value="Ekiti">Ekiti</option>
+                <option value="Enugu">Enugu</option>
+                <option value="Imo">Imo</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Kogi">Kogi</option>
+                <option value="Lagos">Lagos</option>
+                <option value="Niger">Niger</option>
+                <option value="Ogun">Ogun</option>
+                <option value="Osun">Osun</option>
+                <option value="Oyo">Oyo</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Sokoto">Sokoto</option>
+                <option value="FCT">FCT</option>
+                <option value="Taraba">Taraba</option> 
+            </select><br><br>
+
+        <label for="Old Address">Old City:  </label> <b> {{ edit.city }}</b> <br><br>
+        <label for="City">Current City*</label>
+            <select id="ncity" class="text1" name="ncity">
+                <option value="Ibadan">Ibadan</option>
+                <option value="Lagos">Lagos</option>  
+                <option value="Benin city">Benin city</option>
+                <option value="Badagry">Badagry</option>
+                <option value="Ikorodu">Ikorodu</option>
+                <option value="Epe">Epe</option>
+                <option value="Onitsha">Onitsha</option>
+                <option value="Nsukka">Nsukka</option>
+                <option value="Ikot Ekpene">Ikot Ekpene</option>
+                <option value="Oshogbo">Oshogbo</option>
+                <option value="Port-harcout">Port-harcout</option>
+                <option value="Ilorin">Ilorin</option>
+                <option value="Ijebu-Ode">Ijebu-Ode</option>
+                <option value="Sagamu">Sagamu</option>
+                <option value="Abuja">Abuja</option>
+            </select><br><br>
+
+        <label for="Old Address">Current Patient Status:  </label> <b>{{ edit.status }}</b> <br><br>
+        <label for="status">New Patient Status*</label>
+        <select id="status" class="text1" name="status">
+            <option value="Active">Active</option>
+            <option value="Discharged">Discharged</option>
+        </select>
+
+        <pre>(*)Fields are compulsary</pre>
+        <button type="submit" class="button" >Update</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="font-weight: bolder;" > {{ msg }} </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith%}
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
